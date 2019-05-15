@@ -1,2 +1,5 @@
-# requestApi
-基于requests封装的请求库
+之前写的那版http api不好用
+
+重写一般
+
+写好顺手为止
