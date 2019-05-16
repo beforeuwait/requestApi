@@ -15,4 +15,10 @@
     5. 日志看不懂
     6. 引用不便捷
     
+    update:
+    05-16: todo: 如何引入时候，将日志也如项目当前的路径
 """
+__all__ = ['logger']
+from . import theUtils
+from .loggerHandler import logger, filter_dict
+

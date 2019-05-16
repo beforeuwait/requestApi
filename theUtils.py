@@ -2,32 +2,31 @@
 
 from .config import retry
 from copy import deepcopy
-import requests
+
 
 def do_cycle_request(fun):
 
-    def do_request():
+    def do_request(*args):
         html = None
         retryc = deepcopy(retry)
         while retryc > 0:
             try:
-                result = fun()
+                result = fun(*args)
                 html = result[1]
                 if result[0]:
                     break
             except Exception as e:
-                print('请求出错')
+                print('请求出错\t:{0}'.format(e))
             retryc -= 1
         return html
 
     return do_request
 
 
-url = 'https://www.baidu.com'
-session = requests.session()
+
 
 @do_cycle_request
-def temp_request():
+def temp_request(session, url):
     response = session.get(url)
     state_code = response.status_code
     if state_code < 300:
@@ -35,4 +34,3 @@ def temp_request():
     else:
         return (False, 'null_html')
 
-print(temp_request())
