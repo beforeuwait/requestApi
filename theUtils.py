@@ -1,6 +1,7 @@
 # coding=utf-8
 
-from .config import retry
+from importlib import reload
+import requestApi.config as cnf
 from copy import deepcopy
 
 
@@ -8,7 +9,8 @@ def do_cycle_request(fun):
 
     def do_request(*args):
         html = None
-        retryc = deepcopy(retry)
+        reload(cnf)
+        retryc = deepcopy(cnf.retry)
         while retryc > 0:
             try:
                 result = fun(*args)
@@ -21,8 +23,6 @@ def do_cycle_request(fun):
         return html
 
     return do_request
-
-
 
 
 @do_cycle_request
