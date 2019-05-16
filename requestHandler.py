@@ -49,8 +49,8 @@ class sessionRequest(requestModel):
     def post_session_no_proxy(self, url, headers, payloads, cookies=None):
         pass
     
-    def cookies_handler(self):
+    def cookies_handler(self, cookies):
         # deal cookie
         pass
-        
+
     
