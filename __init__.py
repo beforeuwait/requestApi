@@ -17,8 +17,10 @@
     
     update:
     05-16: todo: 如何引入时候，将日志也如项目当前的路径
+
+    05-20: 完成第一版的开发
 """
 
-__all__ = ['httpApi']
+__all__ = ['HttpApi']
 
-from .requestApi import httpApi
+from .requestApi import HttpApi

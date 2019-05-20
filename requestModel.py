@@ -1,7 +1,7 @@
 # coding=utf-8
 
 
-class requestModel:
+class RequestModel:
 
     def get_request_proxy(self, *args):
         # do get request with proxy in request way
@@ -62,24 +62,42 @@ class requestModel:
     @classmethod
     def switcher(cls):
         return {
+            # request with session
             'yes': {
+                # request with proxy
                 'yes': {
                     'get': cls.get_session_proxy,
                     'post': cls.post_session_proxy,
                 },
+                # request without proxy
                 'no': {
                     'get': cls.get_session_no_proxy,
                     'post': cls.post_session_no_proxy
                 }
             },
+            # request with out session
             'no': {
-                'yes':{
+                # with proxy
+                'yes': {
                     'get': cls.get_request_proxy,
                     'post': cls.post_request_proxy
                 },
+                # without proxy
                 'no': {
                     'get': cls.get_request_no_proxy,
                     'post': cls.post_session_no_proxy
                 }
             }
         }
+
+    def cookies_handler(self, cookies):
+        # deal cookie
+        pass
+
+    def headers_handler(self, session):
+        # deal headers
+        # like change the referer
+        # like change the user_agent
+        # even add/delete parameter
+        # user define it
+        pass
