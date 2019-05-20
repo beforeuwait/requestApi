@@ -1,13 +1,14 @@
 # coding=utf-8
 
-from .requestModel import requestModel
+from .requestHandler import requestRequest
+from .requestHandler import sessionRequest
 from .exceptions import MethodError
 from .exceptions import IsProxyError
 from .exceptions import IsSessionError
 from .exceptions import ParametersError
 
 
-class httpApi(requestModel):
+class httpApi():
     def __init__(self):
         super(httpApi, self).__init__()
 
@@ -32,7 +33,19 @@ class httpApi(requestModel):
                 raise IsSessionError
             
             # do next 
+            if isSession == 'yes':
+                api = sessionRequest()
+            else:
+                api = requestRequest()
             method = method.lower()
+            html = api.sub_switch().get(isProxy).get(method)(
+                url=url,
+                headers=headers,
+                params=params,
+                payloads=payloads,
+                cookies=cookies)
+            print(html)
+            """
             if isSession == 'yes':
                 if isProxy == 'yes':
                     if method == 'get':
@@ -55,31 +68,8 @@ class httpApi(requestModel):
                         self.get_request_no_proxy()
                     else:
                         self.post_request_no_proxy()
+            """
         else:
             # raise error
             raise ParametersError
         
-    def switcher(self):
-        return  {
-            'yes': {
-                'yes': {
-                    'get': self.get_session_proxy,
-                    'post': self.post_session_proxy,
-                },
-                'no': {
-                    'get': self.get_session_no_proxy,
-                    'post': self.post_session_no_proxy
-                }
-            },
-            'no': {
-                'yes':{
-                    'get': self.get_request_proxy,
-                    'post': self.post_request_proxy
-                },
-                'no': {
-                    'get': self.get_request_no_proxy,
-                    'post': self.post_session_no_proxy
-                }
-            }
-        }
-

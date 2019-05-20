@@ -3,17 +3,18 @@
 from importlib import reload
 import requestApi.config as cnf
 from copy import deepcopy
+from .loggerHandler import logger
 
 
 def do_cycle_request(fun):
 
-    def do_request(*args):
+    def do_request(**args):
         html = None
         reload(cnf)
         retryc = deepcopy(cnf.retry)
         while retryc > 0:
             try:
-                result = fun(*args)
+                result = fun(**args)
                 html = result[1]
                 if result[0]:
                     break

@@ -58,4 +58,28 @@ class requestModel:
             return True
         else:
             return False
-    
+            
+    @classmethod
+    def switcher(cls):
+        return {
+            'yes': {
+                'yes': {
+                    'get': cls.get_session_proxy,
+                    'post': cls.post_session_proxy,
+                },
+                'no': {
+                    'get': cls.get_session_no_proxy,
+                    'post': cls.post_session_no_proxy
+                }
+            },
+            'no': {
+                'yes':{
+                    'get': cls.get_request_proxy,
+                    'post': cls.post_request_proxy
+                },
+                'no': {
+                    'get': cls.get_request_no_proxy,
+                    'post': cls.post_session_no_proxy
+                }
+            }
+        }

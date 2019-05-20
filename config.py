@@ -31,7 +31,6 @@ sleep_w = [3, 4, 5]
 
 sleep_q = [1, 2, 3]
 
-
-import requests
-
-requests.get()
+# request timeout
+# seconds
+timeout = 15
