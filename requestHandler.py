@@ -94,7 +94,6 @@ class SessionRequest(RequestModel):
 
     def __init__(self):
         super(SessionRequest, self).__init__()
-        self.session = requests.session()
 
     @do_cycle_request
     def get_session_proxy(self, url, headers, params=None, cookies=None, code=None):

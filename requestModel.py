@@ -1,7 +1,11 @@
 # coding=utf-8
 
+import requests
+
 
 class RequestModel:
+
+    session = requests.Session()
 
     def get_request_proxy(self, *args):
         # do get request with proxy in request way
@@ -49,6 +53,10 @@ class RequestModel:
         #   isSession: request in seesion or request way
         # ]
         pass
+
+    def get_session_cookie(self):
+        # return cookie
+        return self.session.cookies.items()
 
     @staticmethod
     def deal_state_code(state_code):
