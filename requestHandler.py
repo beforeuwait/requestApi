@@ -52,5 +52,13 @@ class sessionRequest(requestModel):
     def cookies_handler(self, cookies):
         # deal cookie
         pass
+    
+    def headers_handler(self, session):
+        # deal headers
+        # like change the referer
+        # like change the user_agent
+        # even add/delete parameter
+        # user define it
+        pass
 
     

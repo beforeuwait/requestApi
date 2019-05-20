@@ -16,10 +16,15 @@ class IsProxyError(Exception):
     def __str__(self):
         return 'wrong Proxy express, only accept yes/no'
 
-class isSessionError(Exception):
+class IsSessionError(Exception):
     
 
     def __str__(self):
         return 'wrong Session express, on accept yes/no'
 
 
+class ParametersError(Exception):
+
+
+    def __str__(self):
+        return 'wrong parameters, check it that accept Dict type params'

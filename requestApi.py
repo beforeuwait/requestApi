@@ -1,6 +1,10 @@
 # coding=utf-8
 
 from .requestModel import requestModel
+from .exceptions import MethodError
+from .exceptions import IsProxyError
+from .exceptions import IsSessionError
+from .exceptions import ParametersError
 
 
 class httpApi(requestModel):
@@ -19,18 +23,18 @@ class httpApi(requestModel):
             isSession = kwargs.get('isSession', None)
             if not method:
                 # raise error
-                raise
+                raise MemoryError
             elif isProxy not in ('yes', 'no', None):
                 # raise error
-                raise
+                raise IsProxyError
             elif isSession not in ('yes', 'no', None):
                 # raise error
-                raise
+                raise IsSessionError
             
             # do next 
             
         else:
             # raise error
-            raise
+            raise ParametersError
 
 
