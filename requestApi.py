@@ -4,6 +4,7 @@ from .requestHandler import RequestRequest
 from .requestHandler import SessionRequest
 from .requestModel import RequestModel
 from .exceptions import MethodError
+from .exceptions import MethodChoiceError
 from .exceptions import IsProxyError
 from .exceptions import IsSessionError
 from .exceptions import ParametersError
@@ -25,8 +26,12 @@ class HttpApi(RequestModel):
             is_proxy = kwargs.get('isProxy', 'yes')
             is_session = kwargs.get('isSession', 'no')
             code = kwargs.get('code', None)
+
+            method = method.lower()
             if not method:
                 # raise error
+                if method not in ('get', 'post'):
+                    raise MethodChoiceError
                 raise MethodError
             elif is_proxy not in ('yes', 'no'):
                 # raise error
@@ -40,7 +45,6 @@ class HttpApi(RequestModel):
                 api = SessionRequest()
             else:
                 api = RequestRequest()
-            method = method.lower()
             html = api.sub_switch().get(is_proxy).get(method)(
                 url=url,
                 headers=headers,

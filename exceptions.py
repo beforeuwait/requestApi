@@ -7,7 +7,14 @@ class MethodError(Exception):
     
 
     def __str__(self):
-        logger.warning('wrong Method input', extra=filter_dict)
+        logger.warning('none Method input', extra=filter_dict)
+        return 'none Method, send a method'
+
+class MethodChoiceError(Exception):
+    
+
+    def __str__(self):
+        logger.warning('wrong Method Choice input', extra=filter_dict)
         return 'wrong Method, only accept get post'
 
 
