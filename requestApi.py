@@ -53,6 +53,7 @@ class HttpApi(RequestModel):
                 cookies=cookies,
                 code=code
             )
+            print(api.session.cookies.items())
             return html
         else:
             # raise error

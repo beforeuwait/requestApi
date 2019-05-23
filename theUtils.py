@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import time
+import random
 from importlib import reload
 import requestApi.config as cnf
 from copy import deepcopy
@@ -15,7 +16,7 @@ def do_cycle_request(fun):
         retryc = deepcopy(cnf.retry)
         while retryc > 0:
             try:
-                html = fun(self=None,
+                html = fun(
                            url=url,
                            headers=headers,
                            params=params,
@@ -26,7 +27,7 @@ def do_cycle_request(fun):
                     break
             except Exception as e:
                 logger.warning('请求过程中出错:\t{0}'.format(e), extra=filter_dict)
-                time.sleep(cnf.sleep_w)
+                time.sleep(random.choice(cnf.sleep_w))
             retryc -= 1
         return html
 
