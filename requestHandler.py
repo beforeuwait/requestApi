@@ -96,7 +96,7 @@ class SessionRequest(RequestModel):
         super(SessionRequest, self).__init__()
 
     @do_cycle_request
-    def get_session_proxy(self, url, headers, params=None, cookies=None, code=None):
+    def get_session_proxy(self, url, headers, params=None, payloads=None, cookies=None, code=None):
         response = self.session.get(
                                     url=url,
                                     headers=headers,
@@ -115,7 +115,7 @@ class SessionRequest(RequestModel):
         return html
     
     @do_cycle_request
-    def post_session_proxy(self, url, headers, payloads=None, cookies=None, code=None):
+    def post_session_proxy(self, url, headers, params=None, payloads=None, cookies=None, code=None):
         response = self.session.post(
                                     url=url,
                                     headers=headers,
@@ -134,7 +134,7 @@ class SessionRequest(RequestModel):
         return html
     
     @do_cycle_request
-    def get_session_no_proxy(self, url, headers, params=None, cookies=None, code=None):
+    def get_session_no_proxy(self, url, headers, params=None, payloads=None, cookies=None, code=None):
         response = self.session.get(
                                     url=url,
                                     headers=headers,
@@ -152,7 +152,7 @@ class SessionRequest(RequestModel):
         return html
     
     @do_cycle_request
-    def post_session_no_proxy(self, url, headers, payloads=None, cookies=None, code=None):
+    def post_session_no_proxy(self, url, headers, params=None, payloads=None, cookies=None, code=None):
         response = self.session.post(
                                     url=url,
                                     headers=headers,
