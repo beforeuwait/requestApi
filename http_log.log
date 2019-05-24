@@ -1,0 +1,13 @@
+2019-05-24 10:45:13,461 - WARNING - 请求过程中出错:	get_session_proxy() missing 1 required positional argument: 'self'
+2019-05-24 10:45:17,465 - WARNING - 请求过程中出错:	get_session_proxy() missing 1 required positional argument: 'self'
+2019-05-24 10:45:22,470 - WARNING - 请求过程中出错:	get_session_proxy() missing 1 required positional argument: 'self'
+2019-05-24 10:45:25,475 - WARNING - 请求过程中出错:	get_session_proxy() missing 1 required positional argument: 'self'
+2019-05-24 10:45:29,478 - WARNING - 请求过程中出错:	get_session_proxy() missing 1 required positional argument: 'self'
+2019-05-24 10:45:33,479 - WARNING - 请求过程中出错:	get_session_proxy() missing 1 required positional argument: 'self'
+2019-05-24 10:45:36,480 - WARNING - 请求过程中出错:	get_session_proxy() missing 1 required positional argument: 'self'
+2019-05-24 10:45:41,485 - WARNING - 请求过程中出错:	get_session_proxy() missing 1 required positional argument: 'self'
+2019-05-24 10:45:45,491 - WARNING - 请求过程中出错:	get_session_proxy() missing 1 required positional argument: 'self'
+2019-05-24 10:45:49,491 - WARNING - 请求过程中出错:	get_session_proxy() missing 1 required positional argument: 'self'
+2019-05-24 10:55:59,244 - WARNING - 请求过程中出错:	'utf-8' codec can't decode byte 0xcd in position 956: invalid continuation byte
+2019-05-24 10:56:03,355 - WARNING - 请求过程中出错:	'utf-8' codec can't decode byte 0xcd in position 956: invalid continuation byte
+2019-05-24 10:56:09,196 - WARNING - 请求过程中出错:	'utf-8' codec can't decode byte 0xcd in position 956: invalid continuation byte

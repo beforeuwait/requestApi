@@ -1,5 +1,6 @@
 # coding=utf-8
 
+"""
 import time
 import random
 from importlib import reload
@@ -32,4 +33,5 @@ def do_cycle_request(fun):
         return html
 
     return do_request
+"""
 

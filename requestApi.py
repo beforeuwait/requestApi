@@ -2,7 +2,6 @@
 
 from .requestHandler import RequestRequest
 from .requestHandler import SessionRequest
-from .requestModel import RequestModel
 from .exceptions import MethodError
 from .exceptions import MethodChoiceError
 from .exceptions import IsProxyError
@@ -10,12 +9,24 @@ from .exceptions import IsSessionError
 from .exceptions import ParametersError
 
 
-class HttpApi(RequestModel):
+class HttpApi:
 
     def __init__(self):
         super(HttpApi, self).__init__()
 
     def send_args_get_html(self, **kwargs):
+        # get the args and deal them
+        # receive args
+        # include [
+        #   url: the url which we need to connect
+        #   headers: the headers which we use in request headers
+        #   cookies: when we need to use cookie to be checked
+        #   params:  the get request with args
+        #   payloads: the post request with args
+        #   method: choose get or post that we need
+        #   isProxy: is there any proxy tha we need to use
+        #   isSession: request in seesion or request way
+        # ]
         if isinstance(kwargs, dict):
             url = kwargs.get('url', None)
             headers = kwargs.get('headers', None)
@@ -45,15 +56,16 @@ class HttpApi(RequestModel):
                 api = SessionRequest()
             else:
                 api = RequestRequest()
-            html = api.sub_switch().get(is_proxy).get(method)(
+            html = api.run(
                 url=url,
                 headers=headers,
                 params=params,
                 payloads=payloads,
                 cookies=cookies,
-                code=code
+                code=code,
+                is_proxy=is_proxy,
+                method=method
             )
-            print(api.session.cookies.items())
             return html
         else:
             # raise error

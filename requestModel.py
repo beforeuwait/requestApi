@@ -1,57 +1,71 @@
 # coding=utf-8
 
+
+import time
+import random
 import requests
+from copy import deepcopy
+from .config import retry
+from .config import sleep_w
+from .loggerHandler import logger, filter_dict
 
 
 class RequestModel:
 
-    session = requests.Session()
+    def __init__(self):
+        self.session = requests.Session()
 
-    def get_request_proxy(self, *args):
+    def run(self, url, headers, is_proxy, method, params=None, payloads=None, cookies=None, code=None):
+        # receive parameters
+        # then choose func to execute
+        rty = deepcopy(retry)
+        html = 'null_html'
+        while rty > 0:
+            try:
+                response = self.sub_switch().get(is_proxy).get(method)(url=url, headers=headers, params=params, payloads=payloads, cookies=cookies)
+                status_code = response.status_code
+                if self.deal_state_code(status_code):
+                    if code:
+                        html = response.content.decode(code)
+                    else:
+                        html = response.text
+                    break
+            except Exception as e:
+                logger.warning('请求过程中出错:\t{0}'.format(e), extra=filter_dict)
+                time.sleep(random.choice(sleep_w))
+            rty -= 1
+        return html
+
+    def get_request_proxy(self, *args, **kwargs):
         # do get request with proxy in request way
         pass
     
-    def post_request_proxy(self, *args):
+    def post_request_proxy(self, *args, **kwargs):
         # do post request with proxy in request way
         pass
 
-    def get_request_no_proxy(self, *args):
+    def get_request_no_proxy(self, *args, **kwargs):
         # do get request without proxy in request way
         pass
     
-    def post_request_no_proxy(self, *args):
+    def post_request_no_proxy(self, *args, **kwargs):
         # do post request without proxy in request way
         pass
     
-    def get_session_proxy(self, *args):
+    def get_session_proxy(self, *args, **kwargs):
         # do get request with proxy in session way
         pass
     
-    def post_session_proxy(self, *args):
+    def post_session_proxy(self, *args, **kwargs):
         # do post request with proxy in session way
         pass
     
-    def get_session_no_proxy(self, *args):
+    def get_session_no_proxy(self, *args, **kwargs):
         # do get request without proxy in session way
         pass
     
-    def post_session_no_proxy(self, *args):
+    def post_session_no_proxy(self, *args, **kwargs):
         # do post request without proxy in session
-        pass
-    
-    def send_args_get_html(self, **kwargs):
-        # get the args and deal them
-        # receive args
-        # include [
-        #   url: the url which we need to connect
-        #   headers: the headers which we use in request headers
-        #   cookies: when we need to use cookie to be checked
-        #   params:  the get request with args
-        #   payloads: the post request with args
-        #   method: choose get or post that we need
-        #   isProxy: is there any proxy tha we need to use
-        #   isSession: request in seesion or request way
-        # ]
         pass
 
     def get_session_cookie(self):
@@ -67,36 +81,39 @@ class RequestModel:
         else:
             return False
             
-    @classmethod
-    def switcher(cls):
+    def switcher(self):
         return {
             # request with session
             'yes': {
                 # request with proxy
                 'yes': {
-                    'get': cls.get_session_proxy,
-                    'post': cls.post_session_proxy,
+                    'get': self.get_session_proxy,
+                    'post': self.post_session_proxy,
                 },
                 # request without proxy
                 'no': {
-                    'get': cls.get_session_no_proxy,
-                    'post': cls.post_session_no_proxy
+                    'get': self.get_session_no_proxy,
+                    'post': self.post_session_no_proxy
                 }
             },
             # request with out session
             'no': {
                 # with proxy
                 'yes': {
-                    'get': cls.get_request_proxy,
-                    'post': cls.post_request_proxy
+                    'get': self.get_request_proxy,
+                    'post': self.post_request_proxy
                 },
                 # without proxy
                 'no': {
-                    'get': cls.get_request_no_proxy,
-                    'post': cls.post_session_no_proxy
+                    'get': self.get_request_no_proxy,
+                    'post': self.post_session_no_proxy
                 }
             }
         }
+
+    def sub_switch(self):
+        # choose func to execute
+        pass
 
     def cookies_handler(self, cookies):
         # deal cookie
