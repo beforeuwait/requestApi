@@ -3,9 +3,8 @@
 
 import requests
 from .requestModel import RequestModel
-from .real_config import proxy_dyn
+from .config import proxy_dyn
 from .config import timeout
-
 
 
 class RequestRequest(RequestModel):
