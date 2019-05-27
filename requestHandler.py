@@ -12,7 +12,7 @@ class RequestRequest(RequestModel):
     def __init__(self):
         super(RequestRequest, self).__init__()
 
-    def get_request_proxy(self, url, headers,is_verify, params=None, payloads=None, cookies=None):
+    def get_request_proxy(self, url, headers, is_verify, params=None, payloads=None, cookies=None):
 
         return requests.get(url=url, headers=headers, params=params, cookies=cookies, verify=is_verify, proxies=proxy_dyn, timeout=timeout)
 
