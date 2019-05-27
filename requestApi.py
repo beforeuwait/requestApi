@@ -13,6 +13,8 @@ class HttpApi:
 
     def __init__(self):
         super(HttpApi, self).__init__()
+        self.api_r = RequestRequest()
+        self.api_s = SessionRequest()
 
     def send_args_get_html(self, **kwargs):
         # get the args and deal them
@@ -53,9 +55,9 @@ class HttpApi:
             
             # do next 
             if is_session == 'yes':
-                api = SessionRequest()
+                api = self.api_s
             else:
-                api = RequestRequest()
+                api = self.api_r
             html = api.run(
                 url=url,
                 headers=headers,
