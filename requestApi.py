@@ -39,6 +39,8 @@ class HttpApi:
             is_proxy = kwargs.get('isProxy', 'yes')
             is_session = kwargs.get('isSession', 'no')
             code = kwargs.get('code', None)
+            isVerify = kwargs.get('isVerify', True)
+            isByte = kwargs.get('isByte', False)
 
             method = method.lower()
             if not method:
@@ -66,7 +68,9 @@ class HttpApi:
                 cookies=cookies,
                 code=code,
                 is_proxy=is_proxy,
-                method=method
+                method=method,
+                is_verify=isVerify,
+                is_byte=isByte
             )
             return html
         else:

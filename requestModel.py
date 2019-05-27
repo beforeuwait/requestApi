@@ -15,20 +15,22 @@ class RequestModel:
     def __init__(self):
         self.session = requests.Session()
 
-    def run(self, url, headers, is_proxy, method, params=None, payloads=None, cookies=None, code=None):
+    def run(self, url, headers, is_proxy, method, is_byte, is_verify, params=None, payloads=None, cookies=None, code=None):
         # receive parameters
         # then choose func to execute
         rty = deepcopy(retry)
         html = 'null_html'
         while rty > 0:
             try:
-                response = self.sub_switch().get(is_proxy).get(method)(url=url, headers=headers, params=params, payloads=payloads, cookies=cookies)
+                response = self.sub_switch().get(is_proxy).get(method)(url=url, headers=headers, params=params, payloads=payloads, is_verify=is_verify, cookies=cookies)
                 status_code = response.status_code
                 if self.deal_state_code(status_code):
-                    if code:
+                    if code and not is_byte:
                         html = response.content.decode(code)
-                    else:
+                    elif not (is_byte,code):
                         html = response.text
+                    else:
+                        html = response.content
                     break
             except Exception as e:
                 logger.warning('请求过程中出错:\t{0}'.format(e), extra=filter_dict)
